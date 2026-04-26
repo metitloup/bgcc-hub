@@ -8,34 +8,25 @@
     <style>
         .card.leader { opacity: 1; border-style: solid; border-width: 2px; }
         .card.minion { opacity: 0.5; border-style: dashed; border-width: 1px; transform: scale(0.98); margin-top: -5px; }
-
-        /* STYLE ROUGE INTÉGRAL VILAINS SCELLÉ */
         .card.vilains { border-color: var(--neon-red) !important; box-shadow: 0 0 15px rgba(255, 0, 60, 0.2); }
         .card.vilains .card-header { color: var(--neon-red) !important; }
         .card.vilains details summary { color: var(--neon-red) !important; border-color: rgba(255, 0, 60, 0.3) !important; }
-        .card.vilains details[open] summary { background: rgba(255, 0, 60, 0.1) !important; }
         .card.vilains .skill-content { border-left: 2px solid var(--neon-red) !important; }
-
         .vs-col-red select, .vs-col-red .btn-add { border-color: var(--neon-red) !important; color: var(--neon-red) !important; }
         #preview-vilains .removable-item { border-color: rgba(255, 0, 60, 0.4); color: var(--neon-red); }
-        #preview-vilains .removable-item:hover { background: rgba(255, 0, 60, 0.2); border-color: var(--neon-red); }
-
         .vs-grid { display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap; }
         .vs-col { flex: 1; min-width: 140px; }
         .preview-box { margin-top: 10px; padding: 10px; min-height: 40px; background: rgba(0,0,0,0.4); border-radius: 4px; font-size: 0.8em; }
         .removable-item { cursor: pointer; padding: 6px; margin-bottom: 5px; border: 1px solid rgba(0, 242, 255, 0.4); display: flex; justify-content: space-between; color: var(--neon-blue); }
-
-        .stats-icons-row { display: flex; justify-content: space-around; background: rgba(0,0,0,0.8); padding: 10px 5px; border: 1px solid #444; margin: 10px 0; }
-        .stat-unit { text-align: center; display: flex; flex-direction: column; align-items: center; }
-        .stat-icon { font-size: 1.2em; margin-bottom: 2px; }
-        .stat-val { font-weight: bold; color: #fff; font-family: 'Share Tech Mono'; font-size: 1.2em; }
-
+        .stats-icons-row { display: flex; justify-content: space-around; background: rgba(0,0,0,0.8); padding: 10px 2px; border: 1px solid #444; margin: 10px 0; }
+        .stat-unit { text-align: center; display: flex; flex-direction: column; align-items: center; flex: 1; }
+        .stat-icon { font-size: 1.1em; margin-bottom: 2px; }
+        .stat-val { font-weight: bold; color: #fff; font-family: 'Share Tech Mono'; font-size: 1.1em; }
         .btn-add { width: 100%; padding: 10px; background: none; border: 1px solid var(--neon-blue); color: var(--neon-blue); font-family: 'Share Tech Mono'; cursor: pointer; margin-top: 5px;}
         .hidden { display: none !important; }
     </style>
 </head>
 <body>
-
     <audio id="snd-scen" src="sound/cyberpunk-message.mp3" preload="auto"></audio>
     <audio id="snd-vs" src="sound/cyberpunk-alerte.mp3" preload="auto"></audio>
 
@@ -45,16 +36,11 @@
             <button id="m-btn-scen" class="tab-btn active blue" onclick="setAppMode('scen')">SCÉNARIO</button>
             <button id="m-btn-vs" class="tab-btn" onclick="setAppMode('vs')">VERSUS</button>
         </div>
-
         <div id="ui-scen" class="card">
             <label>// MISSION :</label>
             <select id="scen-select" class="search-box" onchange="prepMission()"><option value="">-- SÉLECTION --</option></select>
-            <div id="selection-zone" class="hidden" style="margin-top:10px;">
-                <div id="slot-selectors"></div>
-                <button class="btn-action" onclick="startCombat()">ENGAGER_MISSION</button>
-            </div>
+            <div id="selection-zone" class="hidden" style="margin-top:10px;"><div id="slot-selectors"></div><button class="btn-action" onclick="startCombat()">ENGAGER_MISSION</button></div>
         </div>
-
         <div id="ui-vs" class="card hidden">
             <div class="vs-grid">
                 <div class="vs-col">
@@ -77,21 +63,16 @@
 
     <div id="combat-ui" class="hidden">
         <div class="tab-container">
-            <button class="tab-btn" onclick="goBack()" style="flex:0.2;">
-                <svg viewBox="0 0 24 24" style="width:20px; fill:currentColor;"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-            </button>
+            <button class="tab-btn" onclick="goBack()" style="flex:0.2;"><svg viewBox="0 0 24 24" style="width:20px; fill:currentColor;"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button>
             <button id="btn-tab-heros" class="tab-btn active blue" onclick="switchTab('heros')">HÉROS</button>
             <button id="btn-tab-vilains" class="tab-btn red" onclick="switchTab('vilains')">VILAINS</button>
         </div>
-        <div id="tab-heros"></div>
-        <div id="tab-vilains" class="hidden"></div>
+        <div id="tab-heros"></div><div id="tab-vilains" class="hidden"></div>
     </div>
 
     <script>
         let db = { scenario:[], personnage:[], scenario_equipe:[], Competence:[], perso_fiche:[], personnage_stats_fixes:[] };
-        let appMode = 'scen';
-        let vsList = { heros: [], vilains: [] };
-        let scenarioSelections = {};
+        let appMode = 'scen'; let vsList = { heros: [], vilains: [] }; let scenarioSelections = {};
 
         async function init() {
             try {
@@ -99,23 +80,16 @@
                 const raw = await res.json();
                 db = { ...db, ...raw };
                 db.personnage_stats_fixes = raw.personnage_stats_fixes || [];
-
                 const sel = document.getElementById('scen-select');
                 db.scenario.sort((a,b) => parseInt(a.scen_id) - parseInt(b.scen_id)).forEach((s, i) => {
                     sel.innerHTML += `<option value="${s.scen_id}">${i + 1}. ${s.scen_nom}</option>`;
                 });
-
-                loadState();
-                updateVsMenus();
-            } catch (e) { console.error("ERR_DB", e); }
+                loadState(); updateVsMenus();
+            } catch (e) { console.error(e); }
         }
 
         function saveState() {
-            const state = {
-                appMode, vsList, scenarioSelections,
-                scenId: document.getElementById('scen-select').value,
-                isCombatActive: !document.getElementById('combat-ui').classList.contains('hidden')
-            };
+            const state = { appMode, vsList, scenarioSelections, scenId: document.getElementById('scen-select').value, isCombatActive: !document.getElementById('combat-ui').classList.contains('hidden') };
             localStorage.setItem('waynetech_state', JSON.stringify(state));
         }
 
@@ -125,11 +99,7 @@
             const s = JSON.parse(saved);
             setAppMode(s.appMode);
             vsList = s.vsList || { heros: [], vilains: [] };
-            if (s.scenId) {
-                document.getElementById('scen-select').value = s.scenId;
-                scenarioSelections = s.scenarioSelections || {};
-                prepMission(true);
-            }
+            if (s.scenId) { document.getElementById('scen-select').value = s.scenId; scenarioSelections = s.scenarioSelections || {}; prepMission(true); }
             if (s.isCombatActive) startCombat(true);
         }
 
@@ -152,12 +122,12 @@
             const taken = [...vsList.heros, ...vsList.vilains].map(id => parseInt(id));
             const valid = db.personnage_stats_fixes.map(s => parseInt(s.psf_person_id));
 
-            // FILTRES CORRIGÉS ICI (IDS 1,4 et 2,3 réintégrés)
-            const hList = db.personnage.filter(p => [1, 4].includes(parseInt(p.personnage_type_id)) && !taken.includes(parseInt(p.person_id)) && valid.includes(parseInt(p.person_id)));
-            const vList = db.personnage.filter(p => [2, 3].includes(parseInt(p.personnage_type_id)) && !taken.includes(parseInt(p.person_id)) && valid.includes(parseInt(p.person_id)));
+            // --- FILTRAGE RÉTABLI : 1,4 Héros | 2,3 Vilains ---
+            const filterH = db.personnage.filter(p => [1, 4].includes(parseInt(p.personnage_type_id)) && !taken.includes(parseInt(p.person_id)) && valid.includes(parseInt(p.person_id)));
+            const filterV = db.personnage.filter(p => [2, 3].includes(parseInt(p.personnage_type_id)) && !taken.includes(parseInt(p.person_id)) && valid.includes(parseInt(p.person_id)));
 
-            document.getElementById('vs-pick-heros').innerHTML = getSortedList(hList.map(x=>x.person_id)).map(p => `<option value="${p.person_id}">${p.person_nom}</option>`).join('');
-            document.getElementById('vs-pick-vilains').innerHTML = getSortedList(vList.map(x=>x.person_id)).map(p => `<option value="${p.person_id}">${p.person_nom}</option>`).join('');
+            document.getElementById('vs-pick-heros').innerHTML = getSortedList(filterH.map(x=>x.person_id)).map(p => `<option value="${p.person_id}">${p.person_nom}</option>`).join('');
+            document.getElementById('vs-pick-vilains').innerHTML = getSortedList(filterV.map(x=>x.person_id)).map(p => `<option value="${p.person_id}">${p.person_nom}</option>`).join('');
             renderPreviews();
         }
 
@@ -190,11 +160,8 @@
                 const sorted = getSortedList(links.filter(l => l.se_slot == slotId).map(l => l.se_person_id));
                 cont.innerHTML += `<div class="card" style="margin-bottom:8px;"><label>SLOT ${slotId}</label><select class="search-box slot-in" data-slot="${slotId}" onchange="updateSlotChoice(this)">${sorted.map(p => `<option value="${p.person_id}">${p.person_nom}</option>`).join('')}</select></div>`;
                 if (restoring && scenarioSelections[slotId]) {
-                    setTimeout(() => { document.querySelector(`select[data-slot="${slotId}"]`).value = scenarioSelections[slotId]; }, 10);
-                } else {
-                    const firstVal = document.querySelector(`select[data-slot="${slotId}"]`)?.value;
-                    if(firstVal) scenarioSelections[slotId] = firstVal;
-                }
+                    setTimeout(() => { const el = document.querySelector(`select[data-slot="${slotId}"]`); if(el) el.value = scenarioSelections[slotId]; }, 10);
+                } else { const val = document.querySelector(`select[data-slot="${slotId}"]`)?.value; if(val) scenarioSelections[slotId] = val; }
             });
             saveState();
         }
@@ -222,22 +189,21 @@
             const p = db.personnage.find(i => Number(i.person_id) === Number(pId));
             if(!p) return "";
             const st = db.personnage_stats_fixes.find(s => Number(s.psf_person_id) === Number(pId)) || {};
-            const type = parseInt(p.personnage_type_id);
-            const isMinion = (type === 2 || type === 4);
-            const targetType = (appMode === 'vs') ? 'versus' : 'scenario';
+            const isMinion = ([2, 4].includes(parseInt(p.personnage_type_id)));
 
             let statsHtml = (appMode === 'vs' || camp === 'vilains') ? `<div class="stats-icons-row">
                 <div class="stat-unit"><span class="stat-icon">🛡️</span><span class="stat-val">${st.psf_def_auto ?? 0}</span></div>
                 <div class="stat-unit"><span class="stat-icon">🥾</span><span class="stat-val">+${st.psf_move_bonus ?? 0}</span></div>
                 <div class="stat-unit"><span class="stat-icon">📐</span><span class="stat-val">${st.psf_envergure ?? 0}</span></div>
+                <div class="stat-unit"><span class="stat-icon">⚠️</span><span class="stat-val">${st.psf_menace ?? 0}</span></div>
                 <div class="stat-unit"><span class="stat-icon">💰</span><span class="stat-val">${st.psf_prix ?? 0}</span></div>
             </div>` : "";
 
-            let allPersoFiche = db.perso_fiche.filter(f => Number(f.perso_fiche_perso_id || f.psf_person_id) === Number(pId));
-            let filteredFiche = allPersoFiche.filter(f => f.fiche_type === targetType);
-            const finalFiche = filteredFiche.length > 0 ? filteredFiche : allPersoFiche;
+            let allF = db.perso_fiche.filter(f => Number(f.perso_fiche_perso_id || f.psf_person_id) === Number(pId));
+            let filteredF = allF.filter(f => f.fiche_type === (appMode === 'vs' ? 'versus' : 'scenario'));
+            const finalF = filteredF.length > 0 ? filteredF : allF;
 
-            const skills = finalFiche.map(f => {
+            const skills = finalF.map(f => {
                 const c = db.Competence.find(i => Number(i.comp_id || i.id) === Number(f.perso_fiche_comp_id || f.comp_id));
                 if(!c) return "";
                 const valX = f.perso_fiche_comp_valeur || f.psf_comp_valeur || "X";
@@ -245,9 +211,7 @@
                 return `<details class="${camp}"><summary>${c.comp_nom} <span>+</span></summary><div class="skill-content">${desc}</div></details>`;
             }).join("");
 
-            return `<div class="card ${camp} ${isMinion?'minion':'leader'}">
-                <div class="card-header" style="color:${camp==='heros'?'var(--neon-blue)':'var(--neon-red)'}">${p.person_nom} <span style="float:right; color:#fff;">PV:${p.person_pv || '?'}</span></div>
-                ${statsHtml}${skills}</div>`;
+            return `<div class="card ${camp} ${isMinion?'minion':'leader'}"><div class="card-header" style="color:${camp==='heros'?'var(--neon-blue)':'var(--neon-red)'}">${p.person_nom} <span style="float:right; color:#fff;">PV:${p.person_pv || '?'}</span></div>${statsHtml}${skills}</div>`;
         }
 
         function switchTab(t) {
