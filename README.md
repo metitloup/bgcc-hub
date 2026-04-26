@@ -37,18 +37,21 @@ Un assistant tactique mobile de table pour le jeu de plateau **Batman: Gotham Ci
 
 ## 🛠 Installation
 
-### 1. Préparation des données
-Utilisez le script `db_to_json.py` pour transformer votre base de données MySQL en fichier utilisable par l'interface :
+### Exécution avec Docker Compose
+Assurez-vous d'avoir Docker et Docker Compose installés, puis lancez la commande suivante à la racine du projet :
+
 ```bash
-pip install mysql-connector-python
-python db_to_json.py
+docker compose up -d
 ```
 
-### 2. Déploiement avec Docker
-Placez le dossier `www` dans un conteneur Nginx ou Apache :
-```bash
-docker run --name waynetech-hud -v /chemin/vers/www:/usr/share/nginx/html:ro -p 8080:80 -d nginx
-```
+L'interface sera alors accessible via votre navigateur à l'adresse :
+👉 `http://localhost:8080`
+
+### Gestion du conteneur
+*   **Arrêter le HUD :** `docker-compose stop`
+*   **Relancer après modification :** `docker-compose up -d`
+*   **Voir les logs :** `docker-compose logs -f`
+
 
 ## 🎨 Design System
 L'interface utilise un thème **Cyber-WayneTech** :
