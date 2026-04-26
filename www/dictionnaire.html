@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WayneTech - Codex des Compétences</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .search-container {
+            position: sticky;
+            top: 0;
+            background: var(--bg-color);
+            padding: 15px 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--neon-blue);
+            margin-bottom: 20px;
+        }
+        .comp-card {
+            margin-bottom: 15px;
+            border-left: 3px solid var(--neon-blue);
+            background: rgba(0, 242, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .comp-card:hover {
+            background: rgba(0, 242, 255, 0.1);
+            transform: translateX(5px);
+        }
+        .comp-name {
+            color: var(--neon-blue);
+            font-family: 'Share Tech Mono';
+            font-size: 1.2em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .comp-effect {
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: #ccc;
+        }
+        .no-result {
+            text-align: center;
+            opacity: 0.5;
+            margin-top: 50px;
+            font-style: italic;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 10px;
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-link"> < RETOUR_HUD</a>
+        <h1>[ CODEX_COMPÉTENCES ]</h1>
+
+        <div class="search-container">
+            <input type="text" id="compSearch" class="search-box" placeholder="// RECHERCHER_POUVOIR..." onkeyup="filterComps()">
+        </div>
+    </header>
+
+    <div id="comp-list">
+        <!-- Les compétences seront injectées ici -->
+        <p style="text-align:center; opacity:0.5;">Chargement de la base de données...</p>
+    </div>
+
+    <script>
+        let allCompetences = [];
+
+        async function initCodex() {
+            try {
+                const res = await fetch('data.json');
+                const db = await res.json();
+
+                // On récupère la table Competence
+                allCompetences = db.Competence || db.competence || [];
+
+                // Tri alphabétique
+                allCompetences.sort((a, b) => a.comp_nom.localeCompare(b.comp_nom));
+
+                renderComps(allCompetences);
+            } catch (e) {
+                document.getElementById('comp-list').innerHTML = "<p class='no-result'>ERREUR_CHARGEMENT_BASE_DONNÉES</p>";
+                console.error(e);
+            }
+        }
+
+        function renderComps(list) {
+            const container = document.getElementById('comp-list');
+            if (list.length === 0) {
+                container.innerHTML = "<p class='no-result'>AUCUN_POUVOIR_TROUVÉ</p>";
+                return;
+            }
+
+            container.innerHTML = list.map(c => {
+                // Nettoyage identique à l'index (SQL rn fix)
+                const cleanEffect = (c.comp_effet || "")
+                    .replace(/\\r\\n|\\rn/g, ' ')
+                    .replace(/([a-zàâçéèêëîïôûù])rn([a-zàâçéèêëîïôûù])/gi, '$1 $2')
+                    .replace(/\[X\]/g, '<b>X</b>');
+
+                return `
+                    <div class="card comp-card">
+                        <span class="comp-name">${c.comp_nom}</span>
+                        <div class="comp-effect">${cleanEffect}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterComps() {
+            const query = document.getElementById('compSearch').value.toLowerCase();
+            const filtered = allCompetences.filter(c =>
+                c.comp_nom.toLowerCase().includes(query) ||
+                (c.comp_effet && c.comp_effet.toLowerCase().includes(query))
+            );
+            renderComps(filtered);
+        }
+
+        document.addEventListener('DOMContentLoaded', initCodex);
+    </script>
+</body>
+</html>

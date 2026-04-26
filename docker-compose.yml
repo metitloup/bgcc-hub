@@ -1,8 +1,8 @@
 services:
-  batman-app:
-    build: .
-    container_name: bgcc_companion
+  app:
+    image: nginx:alpine
+    container_name: bat-app
     ports:
-      - "8081:80" # On change le port externe 8080 par 8081
+      - "8081:80"
     volumes:
       - ./www:/usr/share/nginx/html
