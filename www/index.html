@@ -25,13 +25,13 @@
 
                 <div class="vs-grid" style="border-top: 1px solid #333; margin-top: 20px; padding-top: 10px;">
                     <div class="vs-col">
-                        <label>// RENFORTS_HÉROS</label>
+                        <label>// RENFORTS_HÉROS (ALLIÉS/CIVILS)</label>
                         <select id="scen-add-heros" class="search-box"></select>
                         <button class="btn-add" onclick="addScenReinforcement('heros')">+ AJOUTER</button>
                         <div id="preview-scen-heros" class="preview-box"></div>
                     </div>
-                    <div class="vs-col vs-col-red"> <!-- Correction Rouge Scénario -->
-                        <label>// RENFORTS_VILAINS</label>
+                    <div class="vs-col vs-col-red">
+                        <label>// RENFORTS_VILAINS (ALLIÉS/CIVILS)</label>
                         <select id="scen-add-vilains" class="search-box"></select>
                         <button class="btn-add" onclick="addScenReinforcement('vilains')">+ AJOUTER</button>
                         <div id="preview-scen-vilains" class="preview-box"></div>
@@ -49,7 +49,7 @@
                     <button class="btn-add" onclick="addToVs('heros')">+ AJOUTER</button>
                     <div id="preview-heros" class="preview-box"></div>
                 </div>
-                <div class="vs-col vs-col-red"> <!-- Correction Rouge Versus -->
+                <div class="vs-col vs-col-red">
                     <label>// VILAINS</label>
                     <select id="vs-pick-vilains" class="search-box"></select>
                     <button class="btn-add" onclick="addToVs('vilains')">+ AJOUTER</button>
@@ -118,18 +118,28 @@
             saveState();
         }
 
+        // --- NOUVEAU TRI SCELLÉ : LIEUTENANTS (3) PUIS SBIRES (ALPHA) ---
         function getSortedList(ids) {
-            const weights = { "1": 1, "3": 1, "2": 10, "4": 10 };
-            return ids.map(id => db.personnage.find(p => p.person_id == id)).filter(x => x)
-                      .sort((a, b) => (weights[a.personnage_type_id] - weights[b.personnage_type_id]) || a.person_nom.localeCompare(b.person_nom));
+            return ids.map(id => {
+                const p = db.personnage.find(x => x.person_id == id);
+                const s = db.personnage_stats_fixes.find(x => x.psf_person_id == id) || {};
+                return { ...p, grade_id: parseInt(s.psf_grade_id) || 0 };
+            })
+            .filter(x => x.person_id)
+            .sort((a, b) => {
+                // 1. Priorité aux Lieutenants (Grade 3)
+                const isALieutenant = a.grade_id === 3 ? 0 : 1;
+                const isBLieutenant = b.grade_id === 3 ? 0 : 1;
+                if (isALieutenant !== isBLieutenant) return isALieutenant - isBLieutenant;
+                // 2. Tri alphabétique à l'intérieur des groupes
+                return a.person_nom.localeCompare(b.person_nom);
+            });
         }
 
         function updateScenExtraMenus() {
             const userTaken = [...scenExtras.heros, ...scenExtras.vilains].map(id => parseInt(id));
-            const validPsfIds = db.personnage_stats_fixes.filter(s => s.psf_grade !== "QG/Lieutenant").map(s => parseInt(s.psf_person_id));
-
-            // FILTRE SÉCURISÉ : ALLIES (1) ET CIVILS (4) SEULEMENT
-            const pool = db.personnage.filter(p => [1, 4].includes(parseInt(p.personnage_type_id)) && validPsfIds.includes(parseInt(p.person_id)) && !userTaken.includes(parseInt(p.person_id)));
+            const validPsfIds = db.personnage_stats_fixes.filter(s => parseInt(s.psf_grade_id) !== 3).map(s => parseInt(s.psf_person_id));
+            const pool = db.personnage.filter(p => (parseInt(p.personnage_type_id) === 1 || parseInt(p.personnage_type_id) === 4) && validPsfIds.includes(parseInt(p.person_id)) && !userTaken.includes(parseInt(p.person_id)));
             const options = `<option value="">-- SÉLECTION --</option>` + pool.sort((a,b) => a.person_nom.localeCompare(b.person_nom)).map(p => `<option value="${p.person_id}">${p.person_nom}</option>`).join('');
             document.getElementById('scen-add-heros').innerHTML = options;
             document.getElementById('scen-add-vilains').innerHTML = options;
@@ -152,8 +162,8 @@
         function updateVsMenus() {
             const taken = [...vsList.heros, ...vsList.vilains].map(id => parseInt(id));
             const valid = db.personnage_stats_fixes.map(s => parseInt(s.psf_person_id));
-            const fH = db.personnage.filter(p => [1, 4].includes(parseInt(p.personnage_type_id)) && !taken.includes(parseInt(p.person_id)) && valid.includes(parseInt(p.person_id)));
-            const fV = db.personnage.filter(p => [2, 3].includes(parseInt(p.personnage_type_id)) && !taken.includes(parseInt(p.person_id)) && valid.includes(parseInt(p.person_id)));
+            const fH = db.personnage.filter(p => (parseInt(p.personnage_type_id) === 1 || parseInt(p.personnage_type_id) === 4) && !taken.includes(parseInt(p.person_id)) && valid.includes(parseInt(p.person_id)));
+            const fV = db.personnage.filter(p => (parseInt(p.personnage_type_id) === 2 || parseInt(p.personnage_type_id) === 3) && !taken.includes(parseInt(p.person_id)) && valid.includes(parseInt(p.person_id)));
             document.getElementById('vs-pick-heros').innerHTML = getSortedList(fH.map(x=>x.person_id)).map(p => `<option value="${p.person_id}">${p.person_nom}</option>`).join('');
             document.getElementById('vs-pick-vilains').innerHTML = getSortedList(fV.map(x=>x.person_id)).map(p => `<option value="${p.person_id}">${p.person_nom}</option>`).join('');
         }
@@ -162,10 +172,8 @@
             const id = document.getElementById(camp === 'heros' ? 'vs-pick-heros' : 'vs-pick-vilains').value;
             if(id && !vsList.heros.includes(id) && !vsList.vilains.includes(id)) { vsList[camp].push(id); updateVsMenus(); renderVsPreviews(); saveState(); }
         }
-
         function removeFromVs(camp, id) { vsList[camp] = vsList[camp].filter(i => i != id); updateVsMenus(); renderVsPreviews(); saveState(); }
         function resetVsLists() { vsList = { heros: [], vilains: [] }; scenExtras = { heros: [], vilains: [] }; updateVsMenus(); updateScenExtraMenus(); renderScenExtras(); renderVsPreviews(); saveState(); }
-
         function renderVsPreviews() {
             ['heros', 'vilains'].forEach(c => {
                 const box = document.getElementById(c === 'heros' ? 'preview-heros' : 'preview-vilains');
@@ -200,6 +208,7 @@
                 hIds = [...Array.from(document.querySelectorAll('.slot-in')).map(s => s.value), ...scenExtras.heros];
                 vIds = [...db.scenario_equipe.filter(l => l.se_scen_id == sid && l.se_slot == 0).map(l => l.se_person_id), ...scenExtras.vilains];
             } else { hIds = [...vsList.heros]; vIds = [...vsList.vilains]; }
+
             getSortedList(hIds).forEach(p => hCont.innerHTML += createCard(p.person_id, 'heros'));
             getSortedList(vIds).forEach(p => vCont.innerHTML += createCard(p.person_id, 'vilains'));
             document.getElementById('setup-ui').classList.add('hidden'); document.getElementById('combat-ui').classList.remove('hidden'); saveState();
@@ -208,7 +217,7 @@
         function createCard(pId, camp) {
             const p = db.personnage.find(i => Number(i.person_id) === Number(pId)); if(!p) return "";
             const st = db.personnage_stats_fixes.find(s => Number(s.psf_person_id) === Number(pId)) || {};
-            const isMinion = [2, 4].includes(parseInt(p.personnage_type_id));
+            const isMinion = (parseInt(st.psf_grade_id) !== 3);
             const helpHtml = (st.psf_soutien > 0) ? `<div class="stat-unit"><span class="stat-icon">🤝</span><span class="stat-val">${st.psf_soutien}</span></div>` : "";
             const costHtml = (st.psf_prix > 0) ? `<div class="stat-unit"><span class="stat-icon">💰</span><span class="stat-val">${st.psf_prix}</span></div>` : "";
             let statsHtml = `<div class="stats-icons-row">
@@ -226,7 +235,7 @@
                 const desc = (c.comp_effet || "").replace(/\\r\\n|\\rn/g, ' ').replace(/([a-zàâçéèêëîïôûù])rn([a-zàâçéèêëîïôûù])/gi, '$1 $2').replace(/\[X\]/g, `<b style="color:#fff">${valX}</b>`);
                 return `<details class="${camp}"><summary>${c.comp_nom} <span>+</span></summary><div class="skill-content">${desc}</div></details>`;
             }).join("");
-            return `<div class="card ${camp} ${isMinion?'minion':'leader'}"><div class="card-header" style="color:${camp==='heros'?'var(--neon-blue)':'var(--neon-red)'}">${p.person_nom} <span style="float:right; color:#fff;">PV:${p.person_pv || '?'}</span></div>${statsHtml}${skills}</div>`;
+            return `<div class="card ${camp} ${isMinion ? 'minion' : 'leader'}"><div class="card-header" style="color:${camp==='heros'?'var(--neon-blue)':'var(--neon-red)'}">${p.person_nom} <span style="float:right; color:#fff;">PV:${p.person_pv || '?'}</span></div>${statsHtml}${skills}</div>`;
         }
 
         function switchTab(t) { document.getElementById('tab-heros').classList.toggle('hidden', t !== 'heros'); document.getElementById('tab-vilains').classList.toggle('hidden', t !== 'vilains'); document.getElementById('btn-tab-heros').className = `tab-btn ${t==='heros'?'active blue':''}`; document.getElementById('btn-tab-vilains').className = `tab-btn ${t==='vilains'?'active red':''}`; saveState(); }

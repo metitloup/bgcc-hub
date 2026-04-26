@@ -1,3 +1,4 @@
+/* WayneTech Tactical HUD - Design System v2.1 */
 @import url('https://googleapis.com');
 
 :root {
@@ -16,36 +17,66 @@ body {
     -webkit-user-select: none; user-select: none;
 }
 
-/* Navigation */
+/* --- NAVIGATION & TABS --- */
 .tab-container {
     display: flex; width: 100%; margin-bottom: 20px;
     position: sticky; top: 0; z-index: 100; background: var(--bg-color);
 }
+
 .tab-btn {
     flex: 1; padding: 15px; background: #111; border: 1px solid #333;
     color: #555; font-family: 'Share Tech Mono'; font-weight: bold; cursor: pointer;
+    transition: all 0.3s ease;
 }
+
 .tab-btn.active.blue { color: var(--neon-blue); border-color: var(--neon-blue); background: rgba(0,242,255,0.1); }
 .tab-btn.active.red { color: var(--neon-red); border-color: var(--neon-red); background: rgba(255,0,60,0.1); }
 
-/* Cartes & Hiérarchie */
+/* --- CARTES & HIÉRARCHIE --- */
 .card {
-    background: var(--card-bg); border: 1px solid var(--neon-blue);
-    margin-bottom: 15px; padding: 12px; position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--neon-blue); /* Bleu par défaut pour les héros */
+    margin-bottom: 15px;
+    padding: 12px;
+    position: relative;
 }
-.card.leader { opacity: 1; border-width: 2px; }
-.card.minion { opacity: 0.6; border-style: dashed; transform: scale(0.98); }
 
-.card.vilains { border-color: var(--neon-red) !important; box-shadow: 0 0 15px rgba(255, 0, 60, 0.2); }
+/* Leaders (Héros ID 1 et Vilains ID 3) : Cadre plein, opacité totale */
+.card.leader {
+    opacity: 1 !important;
+    border-style: solid !important;
+    border-width: 2px !important;
+}
+
+/* Minions (Sbires ID 2 et Civils ID 4) : Pointillés, opacité réduite */
+.card.minion {
+    opacity: 0.5 !important;
+    border-style: dashed !important;
+    border-width: 1px !important;
+    transform: scale(0.98);
+}
+
+/* --- THÈME VILAINS (Force le rouge) --- */
+.card.vilains {
+    border-color: var(--neon-red) !important;
+    box-shadow: 0 0 15px rgba(255, 0, 60, 0.2);
+}
 .card.vilains .card-header { color: var(--neon-red) !important; }
 .card.vilains summary { color: var(--neon-red) !important; border-color: rgba(255,60,60,0.2) !important; }
 
+/* Cas particulier : Minion Vilain (Pointillés rouges) */
+.card.vilains.minion { border-color: rgba(255, 0, 60, 0.6) !important; }
+
+/* Cas particulier : Minion Héros (Pointillés bleus) */
+.card.heros.minion { border-color: rgba(0, 242, 255, 0.6) !important; }
+
+/* --- ÉLÉMENTS DE LA CARTE --- */
 .card-header {
     font-weight: bold; font-size: 1.1em; padding-bottom: 5px;
     margin-bottom: 5px; display: flex; justify-content: space-between;
 }
 
-/* Stats en ligne */
+/* Stats en ligne sous le nom */
 .stats-icons-row {
     display: flex; flex-direction: row; flex-wrap: wrap;
     gap: 12px; padding: 5px 0 10px 0; margin-bottom: 5px;
@@ -55,7 +86,7 @@ body {
 .stat-icon { font-size: 0.9em; opacity: 0.8; }
 .stat-val { font-weight: bold; color: #fff; font-size: 1em; }
 
-/* Compétences */
+/* Compétences (Accordéons) */
 details { background: rgba(255,255,255,0.03); margin-bottom: 4px; border-radius: 2px; }
 summary {
     padding: 8px 10px; cursor: pointer; list-style: none;
@@ -65,13 +96,16 @@ summary {
 summary::-webkit-details-marker { display: none; }
 .skill-content { padding: 10px; font-size: 0.85em; color: #bbb; border-top: 1px solid #222; line-height: 1.4; }
 
-/* Grilles Versus et Renforts */
+/* --- GRILLES DE SÉLECTION (VERSUS & SCÉNARIO) --- */
 .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
 .vs-col { min-width: 0; }
 
-/* FORCE LE ROUGE TOTAL SUR LA COLONNE VILAINS */
+/* Force le rouge sur les outils de sélection vilains */
 .vs-col-red label { color: var(--neon-red) !important; }
-.vs-col-red select, .vs-col-red .btn-add { border-color: var(--neon-red) !important; color: var(--neon-red) !important; }
+.vs-col-red select, .vs-col-red .btn-add {
+    border-color: var(--neon-red) !important;
+    color: var(--neon-red) !important;
+}
 
 .preview-box { margin-top: 10px; padding: 8px; background: rgba(0,0,0,0.4); border-radius: 4px; font-size: 0.8em; min-height: 20px;}
 .removable-item {
@@ -80,10 +114,14 @@ summary::-webkit-details-marker { display: none; }
 }
 .removable-item.red-item { border-color: rgba(255, 0, 60, 0.3) !important; color: var(--neon-red) !important; }
 
-/* UI Générale */
+/* --- UI GÉNÉRALE --- */
 .hidden { display: none !important; }
+
 .search-box, .btn-action, .btn-add {
     width: 100%; padding: 12px; background: #000; border: 1px solid var(--neon-blue);
     color: var(--neon-blue); font-family: 'Share Tech Mono'; margin-top: 10px;
     box-sizing: border-box; cursor: pointer; text-transform: uppercase;
+    transition: all 0.2s;
 }
+
+.btn-action:hover, .btn-add:hover { background: rgba(0, 242, 255, 0.1); }

@@ -48,7 +48,7 @@
     {
       "comp_id": 10,
       "comp_nom": "ENTRAVE",
-      "comp_effet": "Permet au possesseur, lorsqu’il réussit une attaque de corps-à-corps, de placer [X]  pions entrave sur une figurine ennemie. Cette attaque n’inflge aucune blessure. En contrepartie, le nombre de succès de la figurine entravée lors de ses attaques, réflexions, manipulations et défenses est réduit de [X] . Ces pions peuvent être enlevés si la figurine entravée ou une figurine amie dans sa zone réussit une manipulation complexe de difficulté [X] ."
+      "comp_effet": "Permet au possesseur, lorsqu’il réussit une attaque de corps-à-corps, de placer [X] pions entrave sur une figurine ennemie. Cette attaque n’inflge aucune blessure. En contrepartie, le nombre de succès de la figurine entravée lors de ses attaques, réflexions, manipulations et défenses est réduit de [X] . Ces pions peuvent être enlevés si la figurine entravée ou une figurine amie dans sa zone réussit une manipulation complexe de difficulté [X] ."
     },
     {
       "comp_id": 11,
@@ -208,7 +208,7 @@
     {
       "comp_id": 57,
       "comp_nom": "GIVRE",
-      "comp_effet": "Permet à son possesseur, lors d’une attaque ou après avoir déclenché une explosion, de geler le terrain en plaçant [X] pions givre dans la zone de l’attaque ou de l’explosion (cf. Dissipation page 44). Chaque pion ajoute à la zone où il est placé l’attribut « terrain  difficile » de niveau 1. Son possesseur y est immunisé."
+      "comp_effet": "Permet à son possesseur, lors d’une attaque ou après avoir déclenché une explosion, de geler le terrain en plaçant [X] pions givre dans la zone de l’attaque ou de l’explosion (cf. Dissipation page 44). Chaque pion ajoute à la zone où il est placé l’attribut « terrain difficile » de niveau 1. Son possesseur y est immunisé."
     },
     {
       "comp_id": 58,
@@ -253,50 +253,14 @@
   ],
   "personnage": [
     {
-      "person_id": 1,
-      "person_nom": "Batman",
-      "personnage_type_id": 1,
-      "person_pv": 6
-    },
-    {
-      "person_id": 2,
-      "person_nom": "Renee Montoya",
+      "person_id": 31,
+      "person_nom": "Alfred",
       "personnage_type_id": 1,
       "person_pv": 4
     },
     {
-      "person_id": 3,
-      "person_nom": "Catwoman",
-      "personnage_type_id": 1,
-      "person_pv": 4
-    },
-    {
-      "person_id": 4,
-      "person_nom": "Blue Bird",
-      "personnage_type_id": 1,
-      "person_pv": 5
-    },
-    {
-      "person_id": 5,
-      "person_nom": "Catwoman (LH)",
-      "personnage_type_id": 1,
-      "person_pv": 4
-    },
-    {
-      "person_id": 6,
-      "person_nom": "Red Hood (Jason)",
-      "personnage_type_id": 1,
-      "person_pv": 5
-    },
-    {
-      "person_id": 7,
-      "person_nom": "Orphan (Cassandra)",
-      "personnage_type_id": 1,
-      "person_pv": 4
-    },
-    {
-      "person_id": 8,
-      "person_nom": "Nightwing",
+      "person_id": 32,
+      "person_nom": "Azrael",
       "personnage_type_id": 1,
       "person_pv": 5
     },
@@ -313,34 +277,10 @@
       "person_pv": 6
     },
     {
-      "person_id": 11,
-      "person_nom": "Brutes chains",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 12,
-      "person_nom": "Brutes firearm",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 13,
-      "person_nom": "Owls handgun",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 14,
-      "person_nom": "Thugs crowbar",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 15,
-      "person_nom": "Thugs firearm",
-      "personnage_type_id": 2,
-      "person_pv": 1
+      "person_id": 27,
+      "person_nom": "Batcow",
+      "personnage_type_id": 1,
+      "person_pv": 3
     },
     {
       "person_id": 16,
@@ -349,82 +289,10 @@
       "person_pv": 5
     },
     {
-      "person_id": 20,
-      "person_nom": "GCPD Officer (Pistol)",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 21,
-      "person_nom": "GCPD Officer (Baton)",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 22,
-      "person_nom": "GCPD Detective",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 23,
-      "person_nom": "GCPD SWAT (Shield)",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 24,
-      "person_nom": "GCPD SWAT (Rifle)",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 25,
-      "person_nom": "GCPD Sharpshooter",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 26,
-      "person_nom": "GCPD Sergeant",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 27,
-      "person_nom": "Batcow",
+      "person_id": 1,
+      "person_nom": "Batman",
       "personnage_type_id": 1,
-      "person_pv": 3
-    },
-    {
-      "person_id": 28,
-      "person_nom": "Batwoman",
-      "personnage_type_id": 1,
-      "person_pv": 4
-    },
-    {
-      "person_id": 29,
-      "person_nom": "Red Robin",
-      "personnage_type_id": 1,
-      "person_pv": 5
-    },
-    {
-      "person_id": 30,
-      "person_nom": "Mr Freeze",
-      "personnage_type_id": 3,
-      "person_pv": 4
-    },
-    {
-      "person_id": 31,
-      "person_nom": "Alfred",
-      "personnage_type_id": 1,
-      "person_pv": 4
-    },
-    {
-      "person_id": 32,
-      "person_nom": "Azrael",
-      "personnage_type_id": 1,
-      "person_pv": 5
+      "person_pv": 6
     },
     {
       "person_id": 33,
@@ -457,10 +325,34 @@
       "person_pv": 5
     },
     {
+      "person_id": 28,
+      "person_nom": "Batwoman",
+      "personnage_type_id": 1,
+      "person_pv": 4
+    },
+    {
       "person_id": 38,
       "person_nom": "Black Canary",
       "personnage_type_id": 1,
       "person_pv": 4
+    },
+    {
+      "person_id": 78,
+      "person_nom": "Black Mask",
+      "personnage_type_id": 3,
+      "person_pv": 4
+    },
+    {
+      "person_id": 77,
+      "person_nom": "Bloom Gang",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 4,
+      "person_nom": "Blue Bird",
+      "personnage_type_id": 1,
+      "person_pv": 5
     },
     {
       "person_id": 39,
@@ -469,10 +361,94 @@
       "person_pv": 5
     },
     {
-      "person_id": 40,
-      "person_nom": "Gordon",
+      "person_id": 11,
+      "person_nom": "Brutes chains",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 12,
+      "person_nom": "Brutes firearm",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 106,
+      "person_nom": "Bud & Lou",
+      "personnage_type_id": 1,
+      "person_pv": 1
+    },
+    {
+      "person_id": 79,
+      "person_nom": "Bud & Lou",
+      "personnage_type_id": 3,
+      "person_pv": 4
+    },
+    {
+      "person_id": 111,
+      "person_nom": "BY-Standers",
+      "personnage_type_id": 4,
+      "person_pv": 1
+    },
+    {
+      "person_id": 3,
+      "person_nom": "Catwoman",
       "personnage_type_id": 1,
       "person_pv": 4
+    },
+    {
+      "person_id": 5,
+      "person_nom": "Catwoman (LH)",
+      "personnage_type_id": 1,
+      "person_pv": 4
+    },
+    {
+      "person_id": 112,
+      "person_nom": "Citizens",
+      "personnage_type_id": 4,
+      "person_pv": 1
+    },
+    {
+      "person_id": 81,
+      "person_nom": "Clayface",
+      "personnage_type_id": 3,
+      "person_pv": 7
+    },
+    {
+      "person_id": 82,
+      "person_nom": "Crazy Inmates",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 83,
+      "person_nom": "Deadshot",
+      "personnage_type_id": 3,
+      "person_pv": 5
+    },
+    {
+      "person_id": 84,
+      "person_nom": "Deathstroke",
+      "personnage_type_id": 3,
+      "person_pv": 5
+    },
+    {
+      "person_id": 102,
+      "person_nom": "Devgru",
+      "personnage_type_id": 1,
+      "person_pv": 1
+    },
+    {
+      "person_id": 74,
+      "person_nom": "Dr Death",
+      "personnage_type_id": 3,
+      "person_pv": 4
+    },
+    {
+      "person_id": 107,
+      "person_nom": "Drones",
+      "personnage_type_id": 1,
+      "person_pv": 1
     },
     {
       "person_id": 41,
@@ -481,10 +457,106 @@
       "person_pv": 5
     },
     {
+      "person_id": 75,
+      "person_nom": "Firefly",
+      "personnage_type_id": 3,
+      "person_pv": 4
+    },
+    {
+      "person_id": 103,
+      "person_nom": "Gardes",
+      "personnage_type_id": 1,
+      "person_pv": 1
+    },
+    {
+      "person_id": 22,
+      "person_nom": "GCPD Detective",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 21,
+      "person_nom": "GCPD Officer (Baton)",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 20,
+      "person_nom": "GCPD Officer (Pistol)",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 109,
+      "person_nom": "GCPD Officers with baton",
+      "personnage_type_id": 1,
+      "person_pv": 1
+    },
+    {
+      "person_id": 110,
+      "person_nom": "GCPD Officers with handgun",
+      "personnage_type_id": 1,
+      "person_pv": 1
+    },
+    {
+      "person_id": 26,
+      "person_nom": "GCPD Sergeant",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 25,
+      "person_nom": "GCPD Sharpshooter",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 24,
+      "person_nom": "GCPD SWAT (Rifle)",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 23,
+      "person_nom": "GCPD SWAT (Shield)",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 40,
+      "person_nom": "Gordon",
+      "personnage_type_id": 1,
+      "person_pv": 4
+    },
+    {
       "person_id": 42,
       "person_nom": "Green Arrow",
       "personnage_type_id": 1,
       "person_pv": 5
+    },
+    {
+      "person_id": 85,
+      "person_nom": "Harley Gang",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 87,
+      "person_nom": "Harley Quinn (Classic)",
+      "personnage_type_id": 3,
+      "person_pv": 4
+    },
+    {
+      "person_id": 86,
+      "person_nom": "Harley Quinn (Hammer)",
+      "personnage_type_id": 3,
+      "person_pv": 4
+    },
+    {
+      "person_id": 105,
+      "person_nom": "Harley Quinn (Hammer)",
+      "personnage_type_id": 1,
+      "person_pv": 1
     },
     {
       "person_id": 43,
@@ -493,10 +565,64 @@
       "person_pv": 4
     },
     {
+      "person_id": 88,
+      "person_nom": "Hazmat Thugs",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 108,
+      "person_nom": "Heavy GCPD",
+      "personnage_type_id": 1,
+      "person_pv": 1
+    },
+    {
+      "person_id": 89,
+      "person_nom": "Hugo Strange",
+      "personnage_type_id": 3,
+      "person_pv": 4
+    },
+    {
       "person_id": 44,
       "person_nom": "Huntress",
       "personnage_type_id": 1,
       "person_pv": 5
+    },
+    {
+      "person_id": 90,
+      "person_nom": "Hush",
+      "personnage_type_id": 3,
+      "person_pv": 5
+    },
+    {
+      "person_id": 91,
+      "person_nom": "Jason Todd (Vilain)",
+      "personnage_type_id": 3,
+      "person_pv": 5
+    },
+    {
+      "person_id": 93,
+      "person_nom": "Joker (Clay)",
+      "personnage_type_id": 3,
+      "person_pv": 7
+    },
+    {
+      "person_id": 94,
+      "person_nom": "Joker (Joe)",
+      "personnage_type_id": 3,
+      "person_pv": 6
+    },
+    {
+      "person_id": 96,
+      "person_nom": "Joker Gang (M)",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 97,
+      "person_nom": "Joker Gang (P)",
+      "personnage_type_id": 2,
+      "person_pv": 1
     },
     {
       "person_id": 45,
@@ -511,28 +637,58 @@
       "person_pv": 5
     },
     {
+      "person_id": 98,
+      "person_nom": "Killer Croc",
+      "personnage_type_id": 3,
+      "person_pv": 6
+    },
+    {
+      "person_id": 99,
+      "person_nom": "Killer Moth",
+      "personnage_type_id": 3,
+      "person_pv": 4
+    },
+    {
+      "person_id": 92,
+      "person_nom": "Mad Hatter",
+      "personnage_type_id": 3,
+      "person_pv": 4
+    },
+    {
+      "person_id": 100,
+      "person_nom": "Man Bat",
+      "personnage_type_id": 3,
+      "person_pv": 5
+    },
+    {
+      "person_id": 76,
+      "person_nom": "Mr Bloom",
+      "personnage_type_id": 3,
+      "person_pv": 5
+    },
+    {
+      "person_id": 30,
+      "person_nom": "Mr Freeze",
+      "personnage_type_id": 3,
+      "person_pv": 4
+    },
+    {
+      "person_id": 8,
+      "person_nom": "Nightwing",
+      "personnage_type_id": 1,
+      "person_pv": 5
+    },
+    {
       "person_id": 47,
       "person_nom": "Oracle",
       "personnage_type_id": 1,
       "person_pv": 4
     },
     {
-      "person_id": 48,
-      "person_nom": "Robin (Damian)",
+      "person_id": 7,
+      "person_nom": "Orphan (Cassandra)",
       "personnage_type_id": 1,
       "person_pv": 4
-    },
-    {
-      "person_id": 49,
-      "person_nom": "Robin (Tim)",
-      "personnage_type_id": 1,
-      "person_pv": 5
-    },
-    {
-      "person_id": 50,
-      "person_nom": "Spoiler",
-      "personnage_type_id": 1,
-      "person_pv": 5
     },
     {
       "person_id": 51,
@@ -541,20 +697,26 @@
       "person_pv": 5
     },
     {
+      "person_id": 13,
+      "person_nom": "Owls handgun",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
       "person_id": 52,
       "person_nom": "Owls Katana",
       "personnage_type_id": 2,
       "person_pv": 1
     },
     {
-      "person_id": 53,
-      "person_nom": "The Penguin",
-      "personnage_type_id": 3,
-      "person_pv": 4
-    },
-    {
       "person_id": 54,
       "person_nom": "Penguin Gang",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 80,
+      "person_nom": "Plants",
       "personnage_type_id": 2,
       "person_pv": 1
     },
@@ -589,6 +751,12 @@
       "person_pv": 5
     },
     {
+      "person_id": 6,
+      "person_nom": "Red Hood (Jason)",
+      "personnage_type_id": 1,
+      "person_pv": 5
+    },
+    {
       "person_id": 60,
       "person_nom": "Red Hood (V)",
       "personnage_type_id": 3,
@@ -601,9 +769,15 @@
       "person_pv": 1
     },
     {
-      "person_id": 62,
-      "person_nom": "The Riddler",
-      "personnage_type_id": 3,
+      "person_id": 29,
+      "person_nom": "Red Robin",
+      "personnage_type_id": 1,
+      "person_pv": 5
+    },
+    {
+      "person_id": 2,
+      "person_nom": "Renee Montoya",
+      "personnage_type_id": 1,
       "person_pv": 4
     },
     {
@@ -619,6 +793,18 @@
       "person_pv": 1
     },
     {
+      "person_id": 48,
+      "person_nom": "Robin (Damian)",
+      "personnage_type_id": 1,
+      "person_pv": 4
+    },
+    {
+      "person_id": 49,
+      "person_nom": "Robin (Tim)",
+      "personnage_type_id": 1,
+      "person_pv": 5
+    },
+    {
       "person_id": 65,
       "person_nom": "Scarecrow",
       "personnage_type_id": 3,
@@ -631,10 +817,52 @@
       "person_pv": 8
     },
     {
+      "person_id": 50,
+      "person_nom": "Spoiler",
+      "personnage_type_id": 1,
+      "person_pv": 5
+    },
+    {
+      "person_id": 104,
+      "person_nom": "Swat with rifle",
+      "personnage_type_id": 1,
+      "person_pv": 1
+    },
+    {
       "person_id": 67,
       "person_nom": "Talon",
       "personnage_type_id": 3,
       "person_pv": 5
+    },
+    {
+      "person_id": 95,
+      "person_nom": "The Joker",
+      "personnage_type_id": 3,
+      "person_pv": 6
+    },
+    {
+      "person_id": 53,
+      "person_nom": "The Penguin",
+      "personnage_type_id": 3,
+      "person_pv": 4
+    },
+    {
+      "person_id": 62,
+      "person_nom": "The Riddler",
+      "personnage_type_id": 3,
+      "person_pv": 4
+    },
+    {
+      "person_id": 14,
+      "person_nom": "Thugs crowbar",
+      "personnage_type_id": 2,
+      "person_pv": 1
+    },
+    {
+      "person_id": 15,
+      "person_nom": "Thugs firearm",
+      "personnage_type_id": 2,
+      "person_pv": 1
     },
     {
       "person_id": 68,
@@ -671,234 +899,6 @@
       "person_nom": "Zsasz",
       "personnage_type_id": 3,
       "person_pv": 4
-    },
-    {
-      "person_id": 74,
-      "person_nom": "Dr Death",
-      "personnage_type_id": 3,
-      "person_pv": 4
-    },
-    {
-      "person_id": 75,
-      "person_nom": "Firefly",
-      "personnage_type_id": 3,
-      "person_pv": 4
-    },
-    {
-      "person_id": 76,
-      "person_nom": "Mr Bloom",
-      "personnage_type_id": 3,
-      "person_pv": 5
-    },
-    {
-      "person_id": 77,
-      "person_nom": "Bloom Gang",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 78,
-      "person_nom": "Black Mask",
-      "personnage_type_id": 3,
-      "person_pv": 4
-    },
-    {
-      "person_id": 79,
-      "person_nom": "Bud & Lou",
-      "personnage_type_id": 3,
-      "person_pv": 4
-    },
-    {
-      "person_id": 80,
-      "person_nom": "Plants",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 81,
-      "person_nom": "Clayface",
-      "personnage_type_id": 3,
-      "person_pv": 7
-    },
-    {
-      "person_id": 82,
-      "person_nom": "Crazy Inmates",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 83,
-      "person_nom": "Deadshot",
-      "personnage_type_id": 3,
-      "person_pv": 5
-    },
-    {
-      "person_id": 84,
-      "person_nom": "Deathstroke",
-      "personnage_type_id": 3,
-      "person_pv": 5
-    },
-    {
-      "person_id": 85,
-      "person_nom": "Harley Gang",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 86,
-      "person_nom": "Harley Quinn (Hammer)",
-      "personnage_type_id": 3,
-      "person_pv": 4
-    },
-    {
-      "person_id": 87,
-      "person_nom": "Harley Quinn (Classic)",
-      "personnage_type_id": 3,
-      "person_pv": 4
-    },
-    {
-      "person_id": 88,
-      "person_nom": "Hazmat Thugs",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 89,
-      "person_nom": "Hugo Strange",
-      "personnage_type_id": 3,
-      "person_pv": 4
-    },
-    {
-      "person_id": 90,
-      "person_nom": "Hush",
-      "personnage_type_id": 3,
-      "person_pv": 5
-    },
-    {
-      "person_id": 91,
-      "person_nom": "Jason Todd (Vilain)",
-      "personnage_type_id": 3,
-      "person_pv": 5
-    },
-    {
-      "person_id": 92,
-      "person_nom": "Mad Hatter",
-      "personnage_type_id": 3,
-      "person_pv": 4
-    },
-    {
-      "person_id": 93,
-      "person_nom": "Joker (Clay)",
-      "personnage_type_id": 3,
-      "person_pv": 7
-    },
-    {
-      "person_id": 94,
-      "person_nom": "Joker (Joe)",
-      "personnage_type_id": 3,
-      "person_pv": 6
-    },
-    {
-      "person_id": 95,
-      "person_nom": "The Joker",
-      "personnage_type_id": 3,
-      "person_pv": 6
-    },
-    {
-      "person_id": 96,
-      "person_nom": "Joker Gang (M)",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 97,
-      "person_nom": "Joker Gang (P)",
-      "personnage_type_id": 2,
-      "person_pv": 1
-    },
-    {
-      "person_id": 98,
-      "person_nom": "Killer Croc",
-      "personnage_type_id": 3,
-      "person_pv": 6
-    },
-    {
-      "person_id": 99,
-      "person_nom": "Killer Moth",
-      "personnage_type_id": 3,
-      "person_pv": 4
-    },
-    {
-      "person_id": 100,
-      "person_nom": "Man Bat",
-      "personnage_type_id": 3,
-      "person_pv": 5
-    },
-    {
-      "person_id": 102,
-      "person_nom": "Devgru",
-      "personnage_type_id": 1,
-      "person_pv": 1
-    },
-    {
-      "person_id": 103,
-      "person_nom": "Gardes",
-      "personnage_type_id": 1,
-      "person_pv": 1
-    },
-    {
-      "person_id": 104,
-      "person_nom": "Swat with rifle",
-      "personnage_type_id": 1,
-      "person_pv": 1
-    },
-    {
-      "person_id": 105,
-      "person_nom": "Harley Quinn (Hammer)",
-      "personnage_type_id": 1,
-      "person_pv": 1
-    },
-    {
-      "person_id": 106,
-      "person_nom": "Bud & Lou",
-      "personnage_type_id": 1,
-      "person_pv": 1
-    },
-    {
-      "person_id": 107,
-      "person_nom": "Drones",
-      "personnage_type_id": 1,
-      "person_pv": 1
-    },
-    {
-      "person_id": 108,
-      "person_nom": "Heavy GCPD",
-      "personnage_type_id": 1,
-      "person_pv": 1
-    },
-    {
-      "person_id": 109,
-      "person_nom": "GCPD Officers with baton",
-      "personnage_type_id": 1,
-      "person_pv": 1
-    },
-    {
-      "person_id": 110,
-      "person_nom": "GCPD Officers with handgun",
-      "personnage_type_id": 1,
-      "person_pv": 1
-    },
-    {
-      "person_id": 111,
-      "person_nom": "BY-Standers",
-      "personnage_type_id": 4,
-      "person_pv": 1
-    },
-    {
-      "person_id": 112,
-      "person_nom": "Citizens",
-      "personnage_type_id": 4,
-      "person_pv": 1
     }
   ],
   "perso_fiche": [
@@ -4270,8 +4270,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 2,
@@ -4279,8 +4279,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 3,
@@ -4288,8 +4288,8 @@
       "psf_move_bonus": 4,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 4,
@@ -4297,8 +4297,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 5,
@@ -4306,8 +4306,8 @@
       "psf_move_bonus": 4,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 6,
@@ -4315,8 +4315,8 @@
       "psf_move_bonus": 1,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 7,
@@ -4324,8 +4324,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 8,
@@ -4333,8 +4333,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 9,
@@ -4342,8 +4342,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 10,
@@ -4351,8 +4351,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 2,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 11,
@@ -4360,8 +4360,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Elite",
-      "psf_prix": 2
+      "psf_prix": 2,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 12,
@@ -4369,8 +4369,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Elite",
-      "psf_prix": 2
+      "psf_prix": 2,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 13,
@@ -4378,8 +4378,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Elite",
-      "psf_prix": 2
+      "psf_prix": 2,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 14,
@@ -4387,8 +4387,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Sbire",
-      "psf_prix": 1
+      "psf_prix": 1,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 15,
@@ -4396,8 +4396,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Sbire",
-      "psf_prix": 1
+      "psf_prix": 1,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 16,
@@ -4405,8 +4405,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": null,
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 28,
@@ -4414,8 +4414,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": null,
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 29,
@@ -4423,8 +4423,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 30,
@@ -4432,8 +4432,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 31,
@@ -4441,8 +4441,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": null,
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 32,
@@ -4450,8 +4450,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": null,
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 33,
@@ -4459,8 +4459,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 35,
@@ -4468,8 +4468,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 36,
@@ -4477,8 +4477,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": null,
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 37,
@@ -4486,8 +4486,8 @@
       "psf_move_bonus": 0,
       "psf_envergure": 0,
       "psf_menace": 0,
-      "psf_grade": "",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 38,
@@ -4495,8 +4495,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 39,
@@ -4504,8 +4504,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 40,
@@ -4513,8 +4513,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 41,
@@ -4522,8 +4522,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 42,
@@ -4531,8 +4531,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 43,
@@ -4540,8 +4540,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 44,
@@ -4549,8 +4549,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 45,
@@ -4558,8 +4558,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 46,
@@ -4567,8 +4567,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 47,
@@ -4576,8 +4576,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 0,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 49,
@@ -4585,8 +4585,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 50,
@@ -4594,8 +4594,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 51,
@@ -4603,8 +4603,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 52,
@@ -4612,8 +4612,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Sbire",
-      "psf_prix": 1
+      "psf_prix": 1,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 53,
@@ -4621,8 +4621,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 54,
@@ -4630,8 +4630,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Elite",
-      "psf_prix": 2
+      "psf_prix": 2,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 55,
@@ -4639,8 +4639,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 56,
@@ -4648,8 +4648,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Sbire",
-      "psf_prix": 1
+      "psf_prix": 1,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 58,
@@ -4657,8 +4657,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 59,
@@ -4666,8 +4666,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 60,
@@ -4675,8 +4675,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 61,
@@ -4684,8 +4684,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Elite",
-      "psf_prix": 1
+      "psf_prix": 1,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 62,
@@ -4693,8 +4693,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 63,
@@ -4702,8 +4702,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Sbire",
-      "psf_prix": 1
+      "psf_prix": 1,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 64,
@@ -4711,8 +4711,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Elite",
-      "psf_prix": 2
+      "psf_prix": 2,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 65,
@@ -4720,8 +4720,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 3,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 66,
@@ -4729,8 +4729,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 2,
       "psf_menace": 2,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 67,
@@ -4738,8 +4738,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 68,
@@ -4747,8 +4747,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 2,
       "psf_menace": 2,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 70,
@@ -4756,8 +4756,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 71,
@@ -4765,8 +4765,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 72,
@@ -4774,8 +4774,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 74,
@@ -4783,8 +4783,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 2,
       "psf_menace": 2,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 75,
@@ -4792,8 +4792,8 @@
       "psf_move_bonus": 5,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 76,
@@ -4801,8 +4801,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 3,
       "psf_menace": 2,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 77,
@@ -4810,8 +4810,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 2,
-      "psf_grade": "Sbire",
-      "psf_prix": 1
+      "psf_prix": 1,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 78,
@@ -4819,8 +4819,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 2,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 79,
@@ -4828,8 +4828,8 @@
       "psf_move_bonus": 5,
       "psf_envergure": 1,
       "psf_menace": 2,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 80,
@@ -4837,8 +4837,8 @@
       "psf_move_bonus": 0,
       "psf_envergure": 2,
       "psf_menace": 2,
-      "psf_grade": "Elite",
-      "psf_prix": 2
+      "psf_prix": 2,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 81,
@@ -4846,8 +4846,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 3,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 83,
@@ -4855,8 +4855,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 84,
@@ -4864,8 +4864,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 85,
@@ -4873,8 +4873,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Sbire",
-      "psf_prix": 1
+      "psf_prix": 1,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 86,
@@ -4882,8 +4882,8 @@
       "psf_move_bonus": 4,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 87,
@@ -4891,8 +4891,8 @@
       "psf_move_bonus": 4,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 88,
@@ -4900,8 +4900,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Sbire",
-      "psf_prix": 1
+      "psf_prix": 1,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 90,
@@ -4909,8 +4909,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 91,
@@ -4918,8 +4918,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Elite",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 95,
@@ -4927,8 +4927,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 98,
@@ -4936,8 +4936,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 2,
       "psf_menace": 2,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 99,
@@ -4945,8 +4945,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 100,
@@ -4954,8 +4954,8 @@
       "psf_move_bonus": 4,
       "psf_envergure": 2,
       "psf_menace": 2,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 102,
@@ -4963,8 +4963,8 @@
       "psf_move_bonus": 3,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Elite",
-      "psf_prix": 2
+      "psf_prix": 2,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 103,
@@ -4972,8 +4972,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Sbire",
-      "psf_prix": 1
+      "psf_prix": 1,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 104,
@@ -4981,8 +4981,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Elite",
-      "psf_prix": 2
+      "psf_prix": 2,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 105,
@@ -4990,8 +4990,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "QG/Lieutenant",
-      "psf_prix": 2
+      "psf_prix": 2,
+      "psf_grade_id": 3
     },
     {
       "psf_person_id": 106,
@@ -4999,8 +4999,8 @@
       "psf_move_bonus": 5,
       "psf_envergure": 0,
       "psf_menace": 0,
-      "psf_grade": "Sbire",
-      "psf_prix": 1
+      "psf_prix": 1,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 107,
@@ -5008,8 +5008,8 @@
       "psf_move_bonus": 5,
       "psf_envergure": 0,
       "psf_menace": 0,
-      "psf_grade": "Sbire",
-      "psf_prix": 1
+      "psf_prix": 1,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 108,
@@ -5017,8 +5017,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Elite",
-      "psf_prix": 2
+      "psf_prix": 2,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 109,
@@ -5026,8 +5026,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Sbire",
-      "psf_prix": 1
+      "psf_prix": 1,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 110,
@@ -5035,8 +5035,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 1,
       "psf_menace": 1,
-      "psf_grade": "Sbire",
-      "psf_prix": 1
+      "psf_prix": 1,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 111,
@@ -5044,8 +5044,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 0,
       "psf_menace": 0,
-      "psf_grade": "Sbire",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": null
     },
     {
       "psf_person_id": 112,
@@ -5053,8 +5053,8 @@
       "psf_move_bonus": 2,
       "psf_envergure": 0,
       "psf_menace": 0,
-      "psf_grade": "Sbire",
-      "psf_prix": 0
+      "psf_prix": 0,
+      "psf_grade_id": null
     }
   ],
   "scenario": [
