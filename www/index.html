@@ -8,29 +8,34 @@
     <style>
         .card.leader { opacity: 1; border-style: solid; border-width: 2px; }
         .card.minion { opacity: 0.5; border-style: dashed; border-width: 1px; transform: scale(0.98); margin-top: -5px; }
+
+        /* STYLE ROUGE INTÉGRAL VILAINS SCELLÉ */
         .card.vilains { border-color: var(--neon-red) !important; box-shadow: 0 0 15px rgba(255, 0, 60, 0.2); }
         .card.vilains .card-header { color: var(--neon-red) !important; }
         .card.vilains details summary { color: var(--neon-red) !important; border-color: rgba(255, 0, 60, 0.3) !important; }
         .card.vilains details[open] summary { background: rgba(255, 0, 60, 0.1) !important; }
         .card.vilains .skill-content { border-left: 2px solid var(--neon-red) !important; }
+
         .vs-col-red select, .vs-col-red .btn-add { border-color: var(--neon-red) !important; color: var(--neon-red) !important; }
         #preview-vilains .removable-item { border-color: rgba(255, 0, 60, 0.4); color: var(--neon-red); }
         #preview-vilains .removable-item:hover { background: rgba(255, 0, 60, 0.2); border-color: var(--neon-red); }
+
         .vs-grid { display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap; }
         .vs-col { flex: 1; min-width: 140px; }
         .preview-box { margin-top: 10px; padding: 10px; min-height: 40px; background: rgba(0,0,0,0.4); border-radius: 4px; font-size: 0.8em; }
         .removable-item { cursor: pointer; padding: 6px; margin-bottom: 5px; border: 1px solid rgba(0, 242, 255, 0.4); display: flex; justify-content: space-between; color: var(--neon-blue); }
+
         .stats-icons-row { display: flex; justify-content: space-around; background: rgba(0,0,0,0.8); padding: 10px 5px; border: 1px solid #444; margin: 10px 0; }
         .stat-unit { text-align: center; display: flex; flex-direction: column; align-items: center; }
         .stat-icon { font-size: 1.2em; margin-bottom: 2px; }
         .stat-val { font-weight: bold; color: #fff; font-family: 'Share Tech Mono'; font-size: 1.2em; }
+
         .btn-add { width: 100%; padding: 10px; background: none; border: 1px solid var(--neon-blue); color: var(--neon-blue); font-family: 'Share Tech Mono'; cursor: pointer; margin-top: 5px;}
         .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-    <!-- Éléments Audio -->
     <audio id="snd-scen" src="sound/cyberpunk-message.mp3" preload="auto"></audio>
     <audio id="snd-vs" src="sound/cyberpunk-alerte.mp3" preload="auto"></audio>
 
@@ -42,7 +47,7 @@
         </div>
 
         <div id="ui-scen" class="card">
-            <label>// CHARGER_MISSION :</label>
+            <label>// MISSION :</label>
             <select id="scen-select" class="search-box" onchange="prepMission()"><option value="">-- SÉLECTION --</option></select>
             <div id="selection-zone" class="hidden" style="margin-top:10px;">
                 <div id="slot-selectors"></div>
@@ -66,6 +71,7 @@
                 </div>
             </div>
             <button class="btn-action" onclick="startCombat()" style="margin-top:20px;">LANCER_DUEL_VERSUS</button>
+            <button onclick="resetVsLists()" style="background:none; border:none; color:#444; width:100%; margin-top:10px; font-family:monospace; cursor:pointer;">[ RÉINITIALISER_ÉQUIPES ]</button>
         </div>
     </header>
 
@@ -85,19 +91,45 @@
         let db = { scenario:[], personnage:[], scenario_equipe:[], Competence:[], perso_fiche:[], personnage_stats_fixes:[] };
         let appMode = 'scen';
         let vsList = { heros: [], vilains: [] };
+        let scenarioSelections = {};
 
         async function init() {
             try {
                 const res = await fetch('data.json');
                 const raw = await res.json();
                 db = { ...db, ...raw };
+
                 const sel = document.getElementById('scen-select');
-                sel.innerHTML = '<option value="">-- SÉLECTION --</option>';
                 db.scenario.sort((a,b) => parseInt(a.scen_id) - parseInt(b.scen_id)).forEach((s, i) => {
                     sel.innerHTML += `<option value="${s.scen_id}">${i + 1}. ${s.scen_nom}</option>`;
                 });
+
+                loadState(); // Restaurer la mémoire après chargement des données
                 updateVsMenus();
-            } catch (e) { console.error("ERR", e); }
+            } catch (e) { console.error("ERR_DB", e); }
+        }
+
+        function saveState() {
+            const state = {
+                appMode, vsList, scenarioSelections,
+                scenId: document.getElementById('scen-select').value,
+                isCombatActive: !document.getElementById('combat-ui').classList.contains('hidden')
+            };
+            localStorage.setItem('waynetech_state', JSON.stringify(state));
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem('waynetech_state');
+            if (!saved) return;
+            const s = JSON.parse(saved);
+            setAppMode(s.appMode);
+            vsList = s.vsList || { heros: [], vilains: [] };
+            if (s.scenId) {
+                document.getElementById('scen-select').value = s.scenId;
+                scenarioSelections = s.scenarioSelections || {};
+                prepMission(true);
+            }
+            if (s.isCombatActive) startCombat(true);
         }
 
         function setAppMode(m) {
@@ -106,123 +138,103 @@
             document.getElementById('ui-vs').classList.toggle('hidden', m !== 'vs');
             document.getElementById('m-btn-scen').className = `tab-btn ${m==='scen'?'active blue':''}`;
             document.getElementById('m-btn-vs').className = `tab-btn ${m==='vs'?'active blue':''}`;
+            saveState();
         }
 
         function getSortedList(ids) {
             const weights = { "1": 1, "3": 1, "2": 10, "4": 10 };
-            return ids.map(id => db.personnage.find(p => p.person_id == id))
-                      .filter(x => x)
-                      .sort((a, b) => {
-                          const wA = weights[a.personnage_type_id] || 99;
-                          const wB = weights[b.personnage_type_id] || 99;
-                          if (wA !== wB) return wA - wB;
-                          return a.person_nom.localeCompare(b.person_nom);
-                      });
+            return ids.map(id => db.personnage.find(p => p.person_id == id)).filter(x => x)
+                      .sort((a, b) => (weights[a.personnage_type_id] - weights[b.personnage_type_id]) || a.person_nom.localeCompare(b.person_nom));
         }
 
         function updateVsMenus() {
             const taken = [...vsList.heros, ...vsList.vilains].map(id => parseInt(id));
-            const validIds = db.personnage_stats_fixes.map(s => parseInt(s.psf_person_id));
-            const hL = db.personnage.filter(p => [1,4].includes(parseInt(p.personnage_type_id)) && !taken.includes(parseInt(p.person_id)) && validIds.includes(parseInt(p.person_id)));
-            const vL = db.personnage.filter(p => [2,3].includes(parseInt(p.personnage_type_id)) && !taken.includes(parseInt(p.person_id)) && validIds.includes(parseInt(p.person_id)));
-            document.getElementById('vs-pick-heros').innerHTML = hL.sort((a,b) => a.person_nom.localeCompare(b.person_nom)).map(p => `<option value="${p.person_id}">${p.person_nom}</option>`).join('');
-            document.getElementById('vs-pick-vilains').innerHTML = vL.sort((a,b) => a.person_nom.localeCompare(b.person_nom)).map(p => `<option value="${p.person_id}">${p.person_nom}</option>`).join('');
+            const valid = db.personnage_stats_fixes.map(s => parseInt(s.psf_person_id));
+            const filter = (types) => db.personnage.filter(p => types.includes(parseInt(p.personnage_type_id)) && !taken.includes(parseInt(p.person_id)) && valid.includes(parseInt(p.person_id)));
+
+            document.getElementById('vs-pick-heros').innerHTML = getSortedList(filter([1,4]).map(x=>x.person_id)).map(p => `<option value="${p.person_id}">${p.person_nom}</option>`).join('');
+            document.getElementById('vs-pick-vilains').innerHTML = getSortedList(filter([2,3]).map(x=>x.person_id)).map(p => `<option value="${p.person_id}">${p.person_nom}</option>`).join('');
             renderPreviews();
         }
 
         function addToVs(camp) {
             const id = document.getElementById(camp === 'heros' ? 'vs-pick-heros' : 'vs-pick-vilains').value;
-            if(id) { vsList[camp].push(id); updateVsMenus(); }
+            if(id && !vsList.heros.includes(id) && !vsList.vilains.includes(id)) { vsList[camp].push(id); updateVsMenus(); saveState(); }
         }
 
-        function removeFromVs(camp, id) {
-            vsList[camp] = vsList[camp].filter(item => item != id);
-            updateVsMenus();
-        }
+        function removeFromVs(camp, id) { vsList[camp] = vsList[camp].filter(i => i != id); updateVsMenus(); saveState(); }
+
+        function resetVsLists() { vsList = { heros: [], vilains: [] }; updateVsMenus(); saveState(); }
 
         function renderPreviews() {
-            ['heros', 'vilains'].forEach(camp => {
-                const cont = document.getElementById(camp === 'heros' ? 'preview-heros' : 'preview-vilains');
-                cont.innerHTML = vsList[camp].map(id => {
+            ['heros', 'vilains'].forEach(c => {
+                const box = document.getElementById(c === 'heros' ? 'preview-heros' : 'preview-vilains');
+                box.innerHTML = vsList[c].map(id => {
                     const p = db.personnage.find(i => i.person_id == id);
-                    return `<div class="removable-item" onclick="removeFromVs('${camp}', ${id})">${p.person_nom} <span>×</span></div>`;
+                    return `<div class="removable-item" onclick="removeFromVs('${c}', ${id})">${p.person_nom} <span>×</span></div>`;
                 }).join('');
             });
         }
 
-        function prepMission() {
+        function prepMission(restoring = false) {
             const sid = document.getElementById('scen-select').value;
             if(!sid) return;
             document.getElementById('selection-zone').classList.remove('hidden');
-            const cont = document.getElementById('slot-selectors');
-            cont.innerHTML = "";
+            const cont = document.getElementById('slot-selectors'); cont.innerHTML = "";
             const links = db.scenario_equipe.filter(l => l.se_scen_id == sid);
             const slots = [...new Set(links.filter(l => l.se_slot > 0).map(l => l.se_slot))].sort();
             slots.forEach(slotId => {
-                const pIds = links.filter(l => l.se_slot == slotId).map(l => l.se_person_id);
-                const sortedChoices = getSortedList(pIds);
-                cont.innerHTML += `<div class="card" style="margin-bottom:8px;"><label>SLOT ${slotId}</label><select class="search-box slot-in">${sortedChoices.map(p => `<option value="${p.person_id}">${p.person_nom}</option>`).join('')}</select></div>`;
+                const sorted = getSortedList(links.filter(l => l.se_slot == slotId).map(l => l.se_person_id));
+                cont.innerHTML += `<div class="card" style="margin-bottom:8px;"><label>SLOT ${slotId}</label><select class="search-box slot-in" data-slot="${slotId}" onchange="updateSlotChoice(this)">${sorted.map(p => `<option value="${p.person_id}">${p.person_nom}</option>`).join('')}</select></div>`;
+                if (restoring && scenarioSelections[slotId]) {
+                    setTimeout(() => { document.querySelector(`select[data-slot="${slotId}"]`).value = scenarioSelections[slotId]; }, 10);
+                } else { scenarioSelections[slotId] = document.querySelector(`select[data-slot="${slotId}"]`).value; }
             });
+            saveState();
         }
 
-        function startCombat() {
-            // --- LOGIQUE AUDIO ---
-            if (appMode === 'vs') {
-                document.getElementById('snd-vs').play();
-            } else {
-                document.getElementById('snd-scen').play();
-            }
+        function updateSlotChoice(el) { scenarioSelections[el.dataset.slot] = el.value; saveState(); }
 
-            const hCont = document.getElementById('tab-heros');
-            const vCont = document.getElementById('tab-vilains');
+        function startCombat(silent = false) {
+            if (!silent) { (appMode === 'vs') ? document.getElementById('snd-vs').play() : document.getElementById('snd-scen').play(); }
+            const hCont = document.getElementById('tab-heros'); const vCont = document.getElementById('tab-vilains');
             hCont.innerHTML = ""; vCont.innerHTML = "";
-            let fH = []; let fV = [];
+            let fH = [], fV = [];
             if(appMode === 'scen') {
                 const sid = document.getElementById('scen-select').value;
                 fH = getSortedList(Array.from(document.querySelectorAll('.slot-in')).map(s => s.value));
                 fV = getSortedList(db.scenario_equipe.filter(l => l.se_scen_id == sid && l.se_slot == 0).map(l => l.se_person_id));
-            } else {
-                fH = getSortedList(vsList.heros); fV = getSortedList(vsList.vilains);
-            }
+            } else { fH = getSortedList(vsList.heros); fV = getSortedList(vsList.vilains); }
             fH.forEach(p => hCont.innerHTML += createCard(p.person_id, 'heros'));
             fV.forEach(p => vCont.innerHTML += createCard(p.person_id, 'vilains'));
             document.getElementById('setup-ui').classList.add('hidden');
             document.getElementById('combat-ui').classList.remove('hidden');
+            saveState();
         }
 
         function createCard(pId, camp) {
             const p = db.personnage.find(i => Number(i.person_id) === Number(pId));
             if(!p) return "";
-            const type = parseInt(p.personnage_type_id);
-            const isMinion = [2,4].includes(type);
-            const targetType = (appMode === 'vs') ? 'versus' : 'adventure';
+            const isMinion = [2,4].includes(parseInt(p.personnage_type_id));
             const st = db.personnage_stats_fixes.find(s => Number(s.psf_person_id) === Number(pId)) || {};
-
-            let statsHtml = "";
-            if (appMode === 'vs' || camp === 'vilains') {
-                statsHtml = `<div class="stats-icons-row">
-                    <div class="stat-unit"><span class="stat-icon">🛡️</span><span class="stat-val">${st.psf_def_auto ?? 0}</span></div>
-                    <div class="stat-unit"><span class="stat-icon">🥾</span><span class="stat-val">+${st.psf_move_bonus ?? 0}</span></div>
-                    <div class="stat-unit"><span class="stat-icon">📐</span><span class="stat-val">${st.psf_envergure ?? 0}</span></div>
-                    <div class="stat-unit"><span class="stat-icon">💰</span><span class="stat-val">${st.psf_prix ?? 0}</span></div>
-                </div>`;
-            }
-
-            let filteredFiche = db.perso_fiche.filter(f => Number(f.perso_fiche_perso_id || f.psf_person_id) === Number(pId));
-            let specificFiche = filteredFiche.filter(f => f.fiche_type === targetType || f.fiche_type === 'aventure');
-            const finalFiche = specificFiche.length > 0 ? specificFiche : filteredFiche;
-
-            const skills = finalFiche.map(f => {
-                const c = db.Competence.find(item => Number(item.comp_id || item.id) === Number(f.perso_fiche_comp_id || f.comp_id));
-                if(!c) return "";
-                const valX = f.perso_fiche_comp_valeur || f.psf_comp_valeur || "X";
-                const desc = (c.comp_effet || "").replace(/\\r\\n/g, ' ').replace(/\\rn/g, ' ').replace(/([a-zàâçéèêëîïôûù])rn([a-zàâçéèêëîïôûù])/gi, '$1 $2').replace(/\[X\]/g, `<b style="color:#fff">${valX}</b>`);
-                return `<details class="${camp}"><summary>${c.comp_nom} <span>+</span></summary><div class="skill-content">${desc}</div></details>`;
-            }).join("");
-
+            const stats = (appMode === 'vs' || camp === 'vilains') ? `<div class="stats-icons-row">
+                <div class="stat-unit"><span class="stat-icon">🛡️</span><span class="stat-val">${st.psf_def_auto ?? 0}</span></div>
+                <div class="stat-unit"><span class="stat-icon">🥾</span><span class="stat-val">+${st.psf_move_bonus ?? 0}</span></div>
+                <div class="stat-unit"><span class="stat-icon">📐</span><span class="stat-val">${st.psf_envergure ?? 0}</span></div>
+                <div class="stat-unit"><span class="stat-icon">💰</span><span class="stat-val">${st.psf_prix ?? 0}</span></div>
+            </div>` : "";
+            const skills = db.perso_fiche.filter(f => Number(f.perso_fiche_perso_id || f.psf_person_id) === Number(pId))
+                .filter(f => f.fiche_type === (appMode === 'vs' ? 'versus' : 'adventure') || f.fiche_type === 'aventure')
+                .map(f => {
+                    const c = db.Competence.find(i => Number(i.comp_id || i.id) === Number(f.perso_fiche_comp_id || f.comp_id));
+                    if(!c) return "";
+                    const valX = f.perso_fiche_comp_valeur || f.psf_comp_valeur || "X";
+                    const desc = (c.comp_effet || "").replace(/\\r\\n|\\rn/g, ' ').replace(/([a-zàâçéèêëîïôûù])rn([a-zàâçéèêëîïôûù])/gi, '$1 $2').replace(/\[X\]/g, `<b style="color:#fff">${valX}</b>`);
+                    return `<details class="${camp}"><summary>${c.comp_nom} <span>+</span></summary><div class="skill-content">${desc}</div></details>`;
+                }).join("");
             return `<div class="card ${camp} ${isMinion?'minion':'leader'}">
                 <div class="card-header" style="color:${camp==='heros'?'var(--neon-blue)':'var(--neon-red)'}">${p.person_nom} <span style="float:right; color:#fff;">PV:${p.person_pv || '?'}</span></div>
-                ${statsHtml}${skills}</div>`;
+                ${stats}${skills}</div>`;
         }
 
         function switchTab(t) {
@@ -230,8 +242,10 @@
             document.getElementById('tab-vilains').classList.toggle('hidden', t !== 'vilains');
             document.getElementById('btn-tab-heros').className = `tab-btn ${t==='heros'?'active blue':''}`;
             document.getElementById('btn-tab-vilains').className = `tab-btn ${t==='vilains'?'active red':''}`;
+            saveState();
         }
-        function goBack() { document.getElementById('combat-ui').classList.add('hidden'); document.getElementById('setup-ui').classList.remove('hidden'); }
+
+        function goBack() { document.getElementById('combat-ui').classList.add('hidden'); document.getElementById('setup-ui').classList.remove('hidden'); saveState(); }
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
